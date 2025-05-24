@@ -1002,7 +1002,7 @@ class _TouchCraftEditorState extends State<TouchCraftEditor> {
   /// if a gif is selected, it's added as an editable item to the stack data.
   /// Updates the state to reflect the new gif addition.
   void _onAddGifTap() async {
-    if (widget.giphyApiKey != null && widget.giphyApiKey != '') {
+    if (widget.giphyApiKey == null || widget.giphyApiKey!.isEmpty) {
       showDialog(
         context: context,
         barrierDismissible: true,
@@ -1146,7 +1146,7 @@ class _TouchCraftEditorState extends State<TouchCraftEditor> {
   }) async {
     _screenRecordingController.start();
     await Future.delayed(Duration(seconds: 3));
-    _screenRecordingController.stop();
+    _screenRecordingController.stop(); 
     final gif = await _screenRecordingController.exporter.exportGif();
     if (gif != null) {
       Uint8List bytes = Uint8List.fromList(gif);
